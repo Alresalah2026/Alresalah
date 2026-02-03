@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مطبعة الرسالة | نظام الطلب الذكي</title>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --teal: #1abc9c;
+            --pink: #d81b60;
+            --dark: #2c3e50;
+            --light-gray: #f4f7f6;
+            --call: #0f9d58;
+            --map: #4285f4;
+        }
+
+        body { font-family: 'Tajawal', sans-serif; margin: 0; background: var(--light-gray); direction: rtl; }
+
+        .nav-container {
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            padding: 15px 5%; 
+            background: #fff; 
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .brand img {
+            width: 45px;
+            height: auto;
+        }
+
+        .logo { font-size: 24px; font-weight: bold; color: var(--teal); }
+        .logo span { color: var(--pink); }
+
+        .hero { background: var(--dark); color: white; padding: 60px 20px; text-align: center; }
+
+        .order-section { padding: 50px 5%; }
+        .form-container { background: white; padding: 30px; border-radius: 15px; max-width: 600px; margin: 0 auto; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
+
+        .input-group { margin-bottom: 20px; }
+        .input-group label { display: block; margin-bottom: 8px; font-weight: bold; color: var(--dark); }
+        .input-group select, 
+        .input-group input, 
+        .input-group textarea {
+            width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px; font-family: inherit;
+        }
+
+        .whatsapp-btn {
+            width: 100%; padding: 15px; background: #25d366; color: white; border: none; border-radius: 8px;
+            font-size: 18px; font-weight: bold; cursor: pointer; transition: 0.3s;
+        }
+        .whatsapp-btn:hover { background: #1ebe57; transform: translateY(-2px); }
+
+        .btn-nav { background: var(--teal); color: white; padding: 10px 20px; border-radius: 5px; text-decoration: none; font-weight: bold; }
+
+        /* ====== Floating Action Buttons (Global App Style) ====== */
+        .floating-actions {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            z-index: 999;
+        }
+
+        .fab {
+            width: 54px;
+            height: 54px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+            transition: 0.3s;
+            text-decoration: none;
+        }
+
+        .fab svg {
+            width: 24px;
+            height: 24px;
+            fill: #fff;
+        }
+
+        .fab.call { background: var(--call); }
+        .fab.map { background: var(--map); }
+
+        .fab:hover {
+            transform: scale(1.08);
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="nav-container">
+        <div class="brand">
+            <img src="logo.png" alt="شعار مطبعة الرسالة">
+            <div class="logo">مطبعة <span>الرسالة</span></div>
+        </div>
+        <a href="#order-form" class="btn-nav">اطلب الآن</a>
+    </div>
+</header>
+
+<section class="hero">
+    <h1>نطبع كل شيء.. بجودة عالمية</h1>
+    <p>لافتات ليد، مطبوعات تجارية، هدايا، وكل ما تحتاجه دعاية شركتك</p>
+</section>
+
+<section id="order-form" class="order-section">
+    <div class="form-container">
+        <h2>نموذج طلب الخدمات</h2>
+
+        <form id="printingForm">
+            <div class="input-group">
+                <label>اسم العميل</label>
+                <input type="text" id="clientName" required>
+            </div>
+
+            <div class="input-group">
+                <label>نوع الخدمة</label>
+                <select id="serviceType" required>
+                    <option value="">اختر الخدمة...</option>
+                    <option value="لافتة ليد مضيئة">لافتة ليد مضيئة</option>
+                    <option value="لافتة صيدلية">لافتة صيدلية</option>
+                    <option value="كروت عمل">كروت عمل</option>
+                    <option value="بروشورات وفلاير">بروشورات وفلاير</option>
+                    <option value="لوحات إعلانية">لوحات إعلانية</option>
+                    <option value="هدايا دعائية">هدايا دعائية</option>
+                    <option value="شالات وقبعات تخرج">شالات وقبعات تخرج</option>
+                    <option value="تجهيز سيارات الإسعاف">تجهيز سيارات الإسعاف</option>
+                    <option value="طباعة إمساكيات رمضان">طباعة إمساكيات رمضان</option>
+                    <option value="أخرى">خدمة أخرى</option>
+                </select>
+            </div>
+
+            <div class="input-group">
+                <label>الكمية أو المقاس</label>
+                <input type="text" id="details" required>
+            </div>
+
+            <div class="input-group">
+                <label>ملاحظات إضافية</label>
+                <textarea id="notes"></textarea>
+            </div>
+
+            <button type="submit" class="whatsapp-btn">إرسال الطلب عبر واتساب</button>
+        </form>
+    </div>
+</section>
+
+<footer>
+    <p>مطبعة الرسالة للدعاية والإعلان</p>
+    <p>واتساب: 0927693885</p>
+    <p>هاتف: 0915746696</p>
+</footer>
+
+<!-- Floating Buttons -->
+<div class="floating-actions">
+    <a href="tel:0915746696" class="fab call" aria-label="اتصال مباشر">
+        <svg viewBox="0 0 24 24">
+            <path d="M6.62 10.79a15.053 15.053 0 006.59 6.59l2.2-2.2a1 1 0 011.01-.24c1.12.37 2.33.57 3.58.57a1 1 0 011 1V20a1 1 0 01-1 1C10.07 21 3 13.93 3 5a1 1 0 011-1h3.5a1 1 0 011 1c0 1.25.2 2.46.57 3.58a1 1 0 01-.24 1.01l-2.2 2.2z"/>
+        </svg>
+    </a>
+
+    <a href="https://maps.app.goo.gl/zyr4UfbNu6AVcnjX7" target="_blank" class="fab map" aria-label="موقعنا على قوقل ماب">
+        <svg viewBox="0 0 24 24">
+            <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 110-5 2.5 2.5 0 010 5z"/>
+        </svg>
+    </a>
+</div>
+
+<script>
+document.getElementById('printingForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    const name = document.getElementById('clientName').value;
+    const service = document.getElementById('serviceType').value;
+    const details = document.getElementById('details').value;
+    const notes = document.getElementById('notes').value;
+    const phone = "218927693885";
+
+    const message =
+        `*طلب جديد من موقع مطبعة الرسالة*%0A` +
+        `----------------------------%0A` +
+        `*اسم العميل:* ${name}%0A` +
+        `*نوع الخدمة:* ${service}%0A` +
+        `*الكمية/المقاس:* ${details}%0A` +
+        `*ملاحظات:* ${notes}%0A` +
+        `----------------------------`;
+
+    window.open(`https://wa.me/${phone}?text=${message}`, '_blank');
+});
+</script>
+
+</body>
+</html>
